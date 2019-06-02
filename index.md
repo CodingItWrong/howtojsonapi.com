@@ -1,6 +1,18 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: home
+layout: page
 ---
+
+## Hands-On Tutorials
+
+### Frontend
+
+- [Ember](ember.html)
+- [React](react.html)
+- [React Native](react-native.html)
+- [Vue](vue.html)
+
+### Backend
+
+- [Java](java.html)
+- [Ruby on Rails](rails.html)
+- [Phoenix](phoenix.html)
