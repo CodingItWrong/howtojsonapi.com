@@ -24,7 +24,7 @@ twitter_username: howtojsonapi
 
 # Build settings
 markdown: kramdown
-theme: minima
+theme: jekyll-theme-bootstrap
 plugins:
   - jekyll-feed
 
