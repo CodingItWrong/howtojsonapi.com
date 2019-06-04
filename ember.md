@@ -4,14 +4,14 @@ title: Building a JSON:API Frontend with Ember Data
 
 [Ember.js][ember] includes a built-in data layer library, Ember Data, that is targeted at connecting to JSON:API web services.
 
-To try it out, let's create a webapp for browsing a video games database.
+To try it out, let's create a webapp for rating dishes at restaurants. We'll call it "Opinion Ate".
 
 Create a new Ember app using [Ember CLI][ember-cli]:
 
 ```sh
 $ npm install -g ember-cli
-$ ember new --no-welcome video-games
-$ cd video-games
+$ ember new --no-welcome opinion-ate
+$ cd opinion-ate
 ```
 
 The JSON:API web service we'll be connecting to is [sandboxapi.reststate.org](https://sandboxapi.reststate.org/), a free service that allows you to create an account so you can write data as well as read it. Sign up for an account there.
@@ -65,14 +65,14 @@ This creates an `app/adapters/application.js` file. Edit it to add the following
 
 This will add the authorization header when the adapter is created.
 
-Now, we need to set up models for each type of resource we want to create. Generate these with Ember CLI:
+Now, we need to set up models for each type of resource we want to create. Generate these with Ember CLI. As a shorthand for `ember generate`, you can just type `ember g`:
 
 ```sh
-$ ember generate model system
-$ ember generate model game
+$ ember g model restaurant
+$ ember g model dish
 ```
 
-We need to edit each model file to declare the attributes and relationships it has. First edit `app/models/game.js`;
+We need to edit each model file to declare the attributes and relationships it has. First edit `app/models/dish.js`;
 
 ```diff
  import DS from 'ember-data';
@@ -80,13 +80,13 @@ We need to edit each model file to declare the attributes and relationships it h
 +const { Model, attr, belongsTo } = DS;
 
  export default Model.extend({
-+  title: attr(),
-+  year: attr(),
-+  system: belongsTo('system'),
++  name: attr(),
++  rating: attr(),
++  restauant: belongsTo('restaurant'),
  });
 ```
 
-Then edit `app/models/system.js`:
+Then edit `app/models/restaurant.js`:
 
 ```diff
  import DS from 'ember-data';
@@ -95,7 +95,7 @@ Then edit `app/models/system.js`:
 
  export default Model.extend({
 +  name: attr(),
-+  games: hasMany('game'),
++  dishes: hasMany('dish'),
  });
 ```
 
@@ -103,10 +103,10 @@ The argument to `belongsTo()` and `hasMany()` is the name of the model the field
 
 That's all we have to do to set up our data layer! Now let's put it to use.
 
-Let's display a list of the video game systems. In Ember, data loading typically happens in the route, so that Ember can intelligently handle routing as the data loads. Generate a route file for the index route, the root of the site:
+Let's display a list of the restaurants. In Ember, data loading typically happens in the route, so that Ember can intelligently handle routing as the data loads. Generate a route file for the index route, the root of the site:
 
 ```sh
-$ ember generate route index
+$ ember g route index
 ```
 
 Then add a model hook to the route:
@@ -116,57 +116,70 @@ Then add a model hook to the route:
 
  export default Route.extend({
 +  model() {
-+    return this.store.findAll('system');
++    return this.store.findAll('restaurant');
 +  },
  });
 ```
 
-`this.store` provides access to the Ember Data store, and is automatically available to routes. We call `findAll()` to load all records, passing the record name of `'system'` to it.
+`this.store` provides access to the Ember Data store, and is automatically available to routes. We call `findAll()` to load all records, passing the record name of `'restaurant'` to it.
 
-Now let's create a component to render these systems:
+Now let's create a component to render these restaurants:
 
 ```sh
-$ ember generate component SystemList
+$ ember g component RestaurantList
 ```
 
-Open the generated `app/templates/components/system-list.hbs` and enter the following:
+Open the generated `app/templates/components/restaurant-list.hbs` and enter the following:
 
 ```handlebars
 {% raw %}<ul>
-  {{#each @systems as |system|}}
+  {{#each @restaurants as |restaurant|}}
     <li>
-      {{system.name}}
+      {{restaurant.name}}
     </li>
   {{/each}}
 </ul>{% endraw %}
 ```
 
-Now include the component in the index route's template, passing the systems to it:
+Now include the component in the index route's template, passing the restaurants to it:
 
 ```handlebars
-{% raw %}<SystemList @systems={{this.model}} />{% endraw %}
+{% raw %}<RestaurantList @restaurants={{this.model}} />{% endraw %}
 ```
 
-Go to `http://localhost:4200` and you should see the list of video game systems.
-
-Now that we've set up reading our data, let's see how we can write data. Let's allow the user to create a new video game system.
-
-We'll create a component to hold our new system form:
+Start the app:
 
 ```sh
-$ ember generate component NewSystemForm
+$ ember server
 ```
 
-Open the generated file `app/templates/components/new-system-form.hbs` and add a simple form:
+Go to `http://localhost:4200` and you should see the list of restaurants.
+
+Now that we've set up reading our data, let's see how we can write data. Let's allow the user to create a new restaurant.
+
+We'll create a component to hold our new restaurant form:
+
+```sh
+$ ember g component NewRestaurantForm
+```
+
+Open the generated file `app/templates/components/new-restaurant-form.hbs` and add a simple form:
 
 ```handlebars
 {% raw %}<form onSubmit={{action this.handleCreate}}>
-  <Input type="text" @value={{this.name}} />
+  <div>
+    Name:
+    <Input type="text" @value={{this.name}} />
+  </div>
+  <div>
+    Address:
+    <Input type="text" @value={{this.address}} />
+  </div>
   <button>Create</button>
 </form>{% endraw %}
 ```
 
-Now open the component's JavaScript file, `app/components/new-system-form.js`, and add the following:
+Now open the component's JavaScript file, `app/components/new-restaurant-form.js`, and add the following:
 
 ```diff
  import Component from '@ember/component';
@@ -174,39 +187,48 @@ Now open the component's JavaScript file, `app/components/new-system-form.js`, a
 
  export default Component.extend({
 +  store: service(),
+
 +  name: '',
++  address: '',
+
 +  async handleCreate(event) {
 +    event.preventDefault();
-+    const post = this.store.createRecord('post', {
++
++    const post = this.store.createRecord('restaurant', {
 +      name: this.name,
++      address: this.address,
 +    });
 +    await post.save();
-+    this.name = '';
++
++    this.setProperties({
++      name: '',
++      address: '',
++    });
 +  },
  });
 ```
 
 Components don't have access to the Ember Data `store` automatically, so we need to use `service()` to inject the `store` service into the component. From there, we can use the store just as we have in the route.
 
-Now, add the `NewSystemForm` component to the index route template:
+Now, add the `NewRestaurantForm` component to the index route's template:
 
 ```diff
-{% raw %}+<NewSystemForm />
- <SystemList @systems={{this.model}} />{% endraw %}
+{% raw %}+<NewRestaurantForm />
+ <RestaurantList @restaurants={{this.model}} />{% endraw %}
 ```
 
-Run the app and you should be able to submit a new system, and it should appear in the list right away. This is because Ember Data automatically adds it to the local store of systems; you don't need to do that manually.
+Reload the app and you should be able to submit a new restaurant, and it should appear in the list right away. This is because Ember Data automatically adds it to the local store of restaurants; you don't need to do that manually.
 
-Finally, let's make a way to delete systems. Add a delete button to each list item:
+Next, let's make a way to delete restaurants. Add a delete button to each list item:
 
 ```diff
 {% raw %} <ul>
-   {{#each @systems as |system|}}
+   {{#each @restaurants as |restaurant|}}
      <li>
-       {{system.name}}
+       {{restaurant.name}}
 +      <button
 +        type="button"
-+        onClick={{action this.deleteSystem system}}
++        onClick={{action this.deleteRestaurant restaurant}}
 +      >
 +        Delete
 +      </button>
@@ -215,77 +237,83 @@ Finally, let's make a way to delete systems. Add a delete button to each list it
  </ul>{% endraw %}
 ```
 
-Implement `deleteSystem()` in `app/components/system-list.js`:
+Implement `deleteRestaurant()` in `app/components/restaurant-list.js`:
 
 ```diff
  import Component from '@ember/component';
 
  export default Component.extend({
-+  deleteSystem(system) {
-+    system.destroyRecord();
++  deleteRestaurant(restaurant) {
++    restaurant.destroyRecord();
 +  }
  });
 ```
 
 Try it out and you can delete records from your list. They're removed from the server, from your local Ember Data store, and from the screen.
 
-Let's wrap things up by showing how you can load related data: the video games for each system.
+Let's wrap things up by showing how you can load related data: the dishes for each restaurant.
 
-Generate a new route for a system detail page:
+Generate a new route for a restaurant detail page:
 
 ```sh
-$ ember generate route system
+$ ember g route restaurant
 ```
 
-Edit the route in `app/router.js` to take a parameter for the system ID:
+Edit the route in `app/router.js` to take a parameter for the restaurant ID:
 
 ```diff
  Router.map(function() {
--  this.route('system');
-+  this.route('system', { path: 'system/:id' });
+-  this.route('restaurant');
++  this.route('restaurant', { path: 'restaurant/:id' });
  });
 ```
 
-In the route's JavaScript file, add a model hook:
+In the route's JavaScript file `app/routes/restaurant.js`, add a model hook:
 
 ```diff
  export default Route.extend({
 +  model({ id }) {
-+    return this.store.findRecord('system', id, {
-+      include: 'games',
++    return this.store.findRecord('restaurant', id, {
++      include: 'dishes',
 +    });
 +  },
  });
 ```
 
-Note that we pass an options object, specifying `include: 'games'`. This will request the related games records to be returned in the response, so we don't have to make multiple requests.
+Note that we pass an options object, specifying `include: 'dishes'`. This will request the related dish records to be returned in the response, so we don't have to make multiple requests.
 
-This time let's render the list of games directly in the route's template, `app/templates/system.hbs`:
+This time let's render the list of records directly in the route's template, `app/templates/restaurant.hbs`:
 
 ```handlebars
 {% raw %}<h1>{{this.model.name}}</h1>
 
 <ul>
-  {{#each this.model.games as |game|}}
+  {{#each this.model.dishes as |dish|}}
     <li>
-      {{game.title}}
-      ({{game.year}})
+      {{dish.name}}
+      -
+      {{dish.rating}} stars
     </li>
   {{/each}}
 </ul>{% endraw %}
 ```
 
-Finally, let's link each system in the SystemList to its detail page:
+Finally, let's link each restaurant in the RestaurantList to its detail page:
 
 ```diff
 {% raw %} <li>
--  {{system.name}}
-+  <LinkTo @route="system" @model={{system.id}}>{{system.name}}</LinkTo>
+-  {{restaurant.name}}
++  <LinkTo
++    @route="restaurant"
++    @model={{restaurant.id}}
++  >
++    {{restaurant.name}}
++  </LinkTo>
    <button
      type="button"{% endraw %}
 ```
 
-Reload the app and click a link to go to a system detail page. You should see the games related to that system.
+Reload the app and click a link to go to a restauant detail page. You should see the dishes related to that restauant.
 
 With that, our tutorial is complete. Notice how much functionality we got without needing to write any custom store code! JSON:API's conventions allow us to use a library like Ember Data to focus on our application and not on managing data.
 
