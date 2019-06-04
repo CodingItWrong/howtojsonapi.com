@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Building a JSON:API Frontend with Vue and Reststate/Vuex
 ---
 
@@ -7,9 +6,10 @@ title: Building a JSON:API Frontend with Vue and Reststate/Vuex
 
 To try it out, let's create a webapp for browsing blog posts.
 
-Create a new Vue app using [Vue CLI 3](https://cli.vuejs.org/). Include Vuex support:
+Create a new Vue app using [Vue CLI 3](https://cli.vuejs.org/):
 
 ```sh
+$ npm install -g @vue/cli
 $ vue create reststate-vuex-tutorial
 ```
 
