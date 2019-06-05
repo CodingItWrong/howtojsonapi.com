@@ -153,7 +153,7 @@ Start the app:
 $ ember server
 ```
 
-Go to `http://localhost:4200` and you should see the list of restaurants.
+Go to `http://localhost:4200` and you'll see some sample restaurants that were created by default for you when you signed up for a Sandbox API account.
 
 Now that we've set up reading our data, let's see how we can write data. Let's allow the user to create a new restaurant.
 
