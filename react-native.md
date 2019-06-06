@@ -1,5 +1,5 @@
 ---
-title: Building a JSON:API Frontend with React Native and Reststate/Mobx
+title: Building a JSON:API App with React Native and Reststate/Mobx
 ---
 
 [Reststate/Mobx][reststate-mobx] is a library for creating frontends driven by JSON:API backends using the MobX data layer.
