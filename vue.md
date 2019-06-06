@@ -340,6 +340,7 @@ Now we can access that restaurant in the template:
 <template>
   <div v-if="restaurant">
     <h1>{{ restaurant.attributes.name }}</h1>
+  </div>
 </template>
 ```
 
@@ -406,7 +407,7 @@ Finally, let's link each restaurant in the list to its detail page:
 
 Go back to the root of the app and click a link to go to a restauant detail page. You should see the dishes related to that restauant.
 
-With that, our tutorial is complete. Notice how much functionality we got without needing to write any custom store code! JSON:API's conventions allow us to use a zero-configuration library like `@reststate/vuex`  to focus on our application and not on managing data.
+With that, our tutorial is complete. Notice how much functionality we got without needing to write any custom store code! JSON:API's conventions allow us to use a zero-configuration library like `@reststate/vuex` to focus on our application and not on managing data.
 
 Now that you have a JSON:API frontend, you should try creating your own backend to power it. Choose a tutorial from the [How to JSON:API home page](/)!
 
