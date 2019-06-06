@@ -21,7 +21,7 @@ Next, add `@reststate/vuex`, as well as the `axios` library for handling the web
 $ yarn add @reststate/vuex axios
 ```
 
-Next, we want to use `@reststate/vuex` to create a Vuex store module for handling posts. The JSON:API web service we'll be connecting to is [sandboxapi.reststate.org](https://sandboxapi.reststate.org/), a free service that allows you to create an account so you can write data as well as read it. Sign up for an account there.
+Next, we want to use `@reststate/vuex` to create a Vuex store module for handling restaurants and dishes. The JSON:API web service we'll be connecting to is [sandboxapi.reststate.org](https://sandboxapi.reststate.org/), a free service that allows you to create an account so you can write data as well as read it. Sign up for an account there.
 
 Next, we need to get a token to authenticate with. We aren't going to build a login form as part of this tutorial. Instead, use a web service client app like [Postman](https://www.getpostman.com/) to send the following request:
 
@@ -134,7 +134,7 @@ Notice a few things:
 - We use Vuex's `mapActions` and `mapGetters` as usual to access the actions and getters.
 - We use a `loadAll` action to request the data from the server in the `mounted` hook.
 - We use an `all` getter to access the data for rendering.
-- The restaurant's ID is available as a property on the `restaurant` directly, but its name is under a `post.attributes` object. This is the standard JSON:API resource object format, and to keep things simple `@reststate/vuex` exposes resources in the same format as JSON:API.
+- The restaurant's ID is available as a property on the `restaurant` directly, but its name is under a `restaurant.attributes` object. This is the standard JSON:API resource object format, and to keep things simple `@reststate/vuex` exposes resources in the same format as JSON:API.
 
 Start the app:
 
