@@ -125,7 +125,7 @@ This sets up a `RestaurantList` component to be rendered as the first screen of 
 Create `src/RestaurantList.js` and add the following content:
 
 ```jsx
-import React, { Component } from 'react';
+{% raw %}import React, { Component } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 import { observer } from 'mobx-react';
 import { restaurantStore } from './stores';
@@ -146,7 +146,12 @@ class RestaurantList extends Component {
           data={restaurantStore.all().slice()}
           keyExtractor={(item) => item.id}
           renderItem={({ item: restaurant }) => (
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
               <Text>{restaurant.attributes.name}</Text>
             </View>
           )}
@@ -156,7 +161,7 @@ class RestaurantList extends Component {
   }
 }
 
-export default observer(RestaurantList);
+export default observer(RestaurantList);{% endraw %}
 ```
 
 Notice a few things:
@@ -276,19 +281,24 @@ We said earlier that wrapping `RestaurantList` in `mobx-react`'s `observer()` fu
 Next, let's make a way to delete restaurants. Add a delete button to each list item:
 
 ```diff
- <FlatList
+{% raw %} <FlatList
    data={restaurantStore.all().slice()}
    keyExtractor={(item) => item.id}
    renderItem={({ item: restaurant }) => (
-     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+     <View style={{
+       flex: 1,
+       flexDirection: 'row',
+       justifyContent: 'space-between',
+       alignItems: 'center',
+     }}>
        <Text>{restaurant.attributes.name}</Text>
 +      <Button
 +        title="Delete"
 +        onPress={() => restaurant.delete()}
 +      />
-    </View>
-  )}
-/>
+     </View>
+   )}
+ />{% endraw %}
 ```
 
 This is all we need to do; the `restaurant` is a rich object with methods like `delete()` that will make the appropriate web service request and update the local store. Try it out and you can delete records from your list.
@@ -371,7 +381,13 @@ Notice that we remembered to use `slice()` so MobX detects that we're accessing 
 Finally, let's link each restaurant in the list to its detail screen:
 
 ```diff
- <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+{% raw %}
+ <View style={{
+   flex: 1,
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+ }}>
 -  <Text>{restaurant.attributes.name}</Text>
 +  <Button
 +    title={restaurant.attributes.name}
@@ -385,7 +401,7 @@ Finally, let's link each restaurant in the list to its detail screen:
      title="Delete"
      onPress={() => restaurant.delete()}
    />
- </View>
+ </View>{% endraw %}
 ```
 
 Go back to the root of the app and tap a link to go to a restauant detail screen. You should see the dishes related to that restauant.
