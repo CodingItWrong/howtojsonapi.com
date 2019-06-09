@@ -423,7 +423,6 @@ Now that you have a JSON:API backend, you should try connecting to it from the f
 [firefox]: https://getfirefox.com
 [install-rails]: https://guides.rubyonrails.org/getting_started.html
 [jr]: http://jsonapi-resources.com/v0.9/guide/resources.html
-[jsonapi-implementations]: https://jsonapi.org/implementations/
 [jsonview]: https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc
 [postman]: https://www.getpostman.com/
 [sqlite]: https://www.sqlite.org/index.html
