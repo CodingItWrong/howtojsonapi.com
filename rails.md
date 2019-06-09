@@ -65,7 +65,7 @@ end
 
 This file contains a *migration*, a class that tells Rails how to make a change to a database. This file will `create_table :restaurants`, which is just what it sounds like. The `do` keyword introduces a block passed to the `create_table` method. It receives a parameter `t`, representing a table. `t.string` creates a new string column, and `t.timestamps` creates `created_at` and `updated_at` columns that Rails will manage for us automatically. Rails will also create a primary key on the table; we don’t need to specify anything for it to do so.
 
-The `restaurants` table hasn’t actually been set up yet; the migration file just records *how* to set it up. You can run it on your computer, when a coworker pulls it down she can run it on hers, and you can run it on the production server as well. Run the migration now with this command:
+The `restaurants` table hasn’t actually been created yet; the migration file just records *how* to create it. You can run it on your computer, when a coworker pulls it down she can run it on hers, and you can run it on the production server as well. Run the migration now with this command:
 
 ```bash
 $ rails db:migrate
