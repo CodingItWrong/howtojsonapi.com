@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: tutorial
 title: Building a JSON:API Backend with Laravel and JSONAPI::Resources
+logo: /images/laravel.svg
+logo_alt: Laravel logo
 ---
 
 [Laravel JSON API][laravel-json-api] is a library for creating JSON:API backends using the Laravel application framework.

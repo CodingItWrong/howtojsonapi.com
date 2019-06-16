@@ -1,5 +1,8 @@
 ---
+layout: tutorial
 title: Building a JSON:API Frontend with Ember Data
+logo: /images/ember.svg
+logo_alt: Ember.js logo
 ---
 
 [Ember.js][ember] includes a built-in data layer library, Ember Data, that is targeted at connecting to JSON:API web services.

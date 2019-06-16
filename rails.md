@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: tutorial
 title: Building a JSON:API Backend with Rails and JSONAPI::Resources
+logo: /images/rails.svg
+logo_alt: Ruby on Rails logo
 ---
 
 [JSONAPI::Resources][jr] is a library for creating JSON:API backends using the Ruby on Rails application framework.

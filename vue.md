@@ -1,5 +1,8 @@
 ---
+layout: tutorial
 title: Building a JSON:API Frontend with Vue and Reststate/Vuex
+logo: /images/vue.svg
+logo_alt: Vue logo
 ---
 
 [Reststate/Vuex][reststate-vuex] is a library for creating frontends driven by JSON:API backends using the Vue framework.

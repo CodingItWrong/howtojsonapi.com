@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: tutorial
 title: Building a JSON:API Backend with Node and Lux
+logo: /images/node.svg
+logo_alt: Node.js logo
 ---
 
 [Lux][lux] is a framework for creating JSON:API backends in Node.

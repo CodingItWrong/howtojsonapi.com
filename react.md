@@ -1,5 +1,8 @@
 ---
+layout: tutorial
 title: Building a JSON:API Frontend with React and Reststate/Mobx
+logo: /images/react.svg
+logo_alt: React logo
 ---
 
 [Reststate/Mobx][reststate-mobx] is a library for creating frontends driven by JSON:API backends using the MobX data layer.

@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: tutorial
 title: Building a JSON:API Backend with JSON API .Net Core
+logo: /images/dotnetcore.svg
+logo_alt: .NET Core logo
 ---
 
 [JSON API .Net Core][json-api-dotnet-core] is a library for creating JSON:API backends in Java, and features integration with Spring Framework.
@@ -420,4 +422,3 @@ Now that you have a JSON:API backend, you should try connecting to it from the f
 [jsonview]: https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc
 [json-api-dotnet-core]: https://json-api-dotnet.github.io/JsonApiDotNetCore/
 [postman]: https://www.getpostman.com/
-

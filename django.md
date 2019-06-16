@@ -1,6 +1,8 @@
 ---
-layout: page
+layout: tutorial
 title: Building a JSON:API Backend with Django REST Framework JSON API
+logo: /images/django.svg
+logo_alt: Django logo
 ---
 
 [Django REST Framework JSON API][dja] (DJA) is a library for creating JSON:API backends using the [Django framework][django], built on top of the [Django REST Framework][drf] library.
