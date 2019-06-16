@@ -386,7 +386,7 @@ Now that our request is set up, click Send and you should get a “201 Created�
 
 Our new record is created and the data is returned to us!
 
-Let’s see how we can create related data as well. To add a new dish associated with restaurant 1, `POST` to `http://localhost:3000/dishes`:
+Let’s see how we can create related data as well. To add a new dish associated with restaurant 3, `POST` to `http://localhost:3000/dishes`:
 
 ```json
 {
