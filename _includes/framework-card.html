@@ -1,10 +1,8 @@
-<div class="card mb-3">
-  <div class="card-body text-center">
-    <a href="{{ include.url }}">
-      <img src="/images/{{ include.image }}" width="100" height="100" alt="{{ include.name }}" />
-    </a>
-    <h5 class="card-title">
-      <a href="{{ include.url }}">{{ include.name }}</a>
-    </h5>
-  </div>
+<div class="d-inline-block mx-3 text-center">
+  <a href="{{ include.url }}">
+    <img src="/images/{{ include.image }}" width="75" height="75" alt="{{ include.name }}" />
+  </a>
+  <h5>
+    <a href="{{ include.url }}" class="text-secondary">{{ include.name }}</a>
+  </h5>
 </div>
