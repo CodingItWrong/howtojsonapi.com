@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/codingitwrong/jekyll-theme-bootstrap.git
-  revision: f76c07178aee531fbf85967ef54350ba18426a77
+  revision: 35cdab07df029258a4c55f245a7ef146a54ff73d
   branch: master
   specs:
     jekyll-theme-bootstrap (0.1.0)
