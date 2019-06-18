@@ -5,7 +5,7 @@ logo: /images/django.svg
 logo_alt: Django logo
 ---
 
-[Django REST Framework JSON API][dja] (DJA) is a library for creating JSON:API backends using the [Django framework][django], built on top of the [Django REST Framework][drf] library.
+[Django REST Framework JSON API][dja] is a library for creating JSON:API backends using the [Django framework][django], built on top of the [Django REST Framework][drf] library.
 
 To try it out, let's create a web service for rating dishes at restaurants. We'll call it "Opinion Ate".
 
@@ -228,12 +228,12 @@ from opinion_ate.serializers import RestaurantSerializer, DishSerializer
 from rest_framework import viewsets
 
 class RestaurantViewSet(viewsets.ModelViewSet):
-  queryset = Restaurant.objects.all()
-  serializer_class = RestaurantSerializer
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
 
 class DishViewSet(viewsets.ModelViewSet):
-  queryset = Dish.objects.all()
-  serializer_class = DishSerializer
+    queryset = Dish.objects.all()
+    serializer_class = DishSerializer
 ```
 
 The last piece of the puzzle is hooking up the URLs. Open `django_jsonapi/urls.py` and replace the contents with the following:
@@ -248,7 +248,7 @@ router.register(r'restaurants', views.RestaurantViewSet)
 router.register(r'dishes', views.DishViewSet)
 
 urlpatterns = [
-  path('', include(router.urls)),
+    path('', include(router.urls)),
 ]
 ```
 
@@ -306,7 +306,7 @@ This is a JSON:API response for a single record. Let’s talk about what’s goi
 - `attributes` is an object containing all the attributes we exposed. They are nested instead of directly on the record to avoid colliding with other standard JSON:API properties like `type`.
 - `relationships` provides data on the relationships for this record. In this case, the record has a `restaurant` relationship. We're given a "resource identifier object," containing the type and ID of the record, but not its attributes.
 
-Try visiting `http://localhost:3000/restaurants/`, in the browser. You’ll see the following:
+Try visiting `http://localhost:8000/restaurants/`, in the browser. You’ll see the following:
 
 ```json
 {
