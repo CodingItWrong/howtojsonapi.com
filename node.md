@@ -303,7 +303,7 @@ Now that we have a restaurant, let's retrieve the data for it. In a new tab, sen
 
 Note that this time `data` is an array. For now it only contains one record.
 
-Let’s see how we can create related data as well. To add a new dish associated with restaurant 1, `POST` to `http://localhost:3000/dishes`:
+Let’s see how we can create related data as well. To add a new dish associated with restaurant 1, `POST` to `http://localhost:4000/dishes`:
 
 ```json
 {
@@ -359,8 +359,8 @@ You should get the following response:
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `http://localhost:3000/restaurants/1`, passing in updated `attributes`.
-- Make a `DELETE` request to `http://localhost:3000/restaurants/1` with no body to delete the record.
+- Make a `PUT` request to `http://localhost:4000/restaurants/1`, passing in updated `attributes`.
+- Make a `DELETE` request to `http://localhost:4000/restaurants/1` with no body to delete the record.
 
 ## There’s More
 We’ve seen a ton of help Lux has provided us: the ability to create, read, update, and delete records, including record relationships. But it offers a lot more too! It allows you to configure validation errors, allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the Lux Guide][lux].

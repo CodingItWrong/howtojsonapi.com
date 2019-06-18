@@ -230,7 +230,7 @@ Next, let’s take a look at the restaurants list view. Visit `http://localhost:
 
 Next, let’s try creating a record. We won’t be able to do this in the browser; we’ll need a more sophisticated web service client to do so. One good option is [Postman][postman]—download it and start it up.
 
-You can use Postman for GET requests as well: set up a GET request to `http://localhost:3000/restaurants` and see how it displays the same data as the browser.
+You can use Postman for GET requests as well: set up a GET request to `http://localhost:8080/restaurants` and see how it displays the same data as the browser.
 
 Next, let’s create a POST request to the same URL, `http://localhost:8080/restaurants`. Go to the Headers tab and enter key “Content-Type” and value “application/vnd.api+json”—this is the content type JSON:API requires.
 
