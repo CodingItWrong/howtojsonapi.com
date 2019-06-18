@@ -99,7 +99,7 @@ Although we don't need to configure columns in the model classes, we do need to 
 +    dishes: {
 +      inverse: 'restaurant',
 +    },
-+  }
++  };
  }
 ```
 
@@ -111,7 +111,7 @@ And add a `belongsTo` field to `Dish` indicating that it belongs to a restaurant
 +    restaurant: {
 +      inverse: 'dishes',
 +    },
-+  }
++  };
  }
 ```
 
@@ -165,7 +165,7 @@ For security purposes, controllers don't allow just any arbitrary parameters to 
  import { Controller } from 'lux-framework';
 
  class RestaurantsController extends Controller {
-+  params = ['name', 'address']
++  params = ['name', 'address'];
  }
 
  export default RestaurantsController;
@@ -177,7 +177,7 @@ And the following to `app/controllers/dishes.js`:
  import { Controller } from 'lux-framework';
 
  class DishesController extends Controller {
-+  params = ['name', 'rating', 'restaurant']
++  params = ['name', 'rating', 'restaurant'];
  }
 
  export default DishesController;
