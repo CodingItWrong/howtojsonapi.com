@@ -47,7 +47,7 @@ Your project's dependencies are configured in `build.gradle`. To add Crnk to you
 
 IntelliJ will let you know that your Gradle file has changed. Click "Import Changes" to download the appropriate dependencies.
 
-## Models
+## Resources
 Crnk represents your data with classes annotated with `@JsonApiResource`. Let's create a resource class representing a restaurant.
 
 In `src/main/java`, right-click `com.example.opinionate`, then choose New > Java Class. Name it "Restaurant". Replace its contents with the following:
@@ -248,7 +248,7 @@ Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to 
 }
 ```
 
-Notice that we don't have to provide an `id` because we’re relying on the server to generate it. And we don’t have to provide the `relationships` or `links`, just the `attributes` we want to set on the new record.
+Notice that we don't have to provide an `id` because we’re relying on the server to generate it. And we don’t have to provide the `links`, just the `attributes` we want to set on the new record.
 
 Now that our request is set up, click Send and you should get a “201 Created” response, with the following body:
 
@@ -272,8 +272,8 @@ Our new record is created and the data is returned to us!
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `http://localhost:3000/restaurants/3`, passing in updated `attributes`.
-- Make a `DELETE` request to `http://localhost:3000/restaurants/3` with no body to delete the record.
+- Make a `PUT` request to `http://localhost:8080/restaurants/3`, passing in updated `attributes`.
+- Make a `DELETE` request to `http://localhost:8080/restaurants/3` with no body to delete the record.
 
 ## There’s More
 We’ve seen a ton of help Crnk has provided us: the ability to create, read, update, and delete records. But it offers a lot more too! It automatically handles related records, allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the Crnk Guide][crnk].

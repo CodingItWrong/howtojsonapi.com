@@ -152,6 +152,8 @@ Add similar entries to `app/serializers/dish.js`:
  export default DishesSerializer;
 ```
 
+Note that although the model uses `belongsTo`, the serializer uses `hasOne`.
+
 Now that our serializers are set, we need to create controllers that handle the HTTP requests for restaurants and dishes:
 
 ```bash
@@ -185,7 +187,7 @@ And the following to `app/controllers/dishes.js`:
 
 Note that the `restaurant` relationship is listed in the `params` along with the plain attributes.
 
-The last piece of the puzzle is hooking up the routes. Open `routes.rb` and add the following:
+The last piece of the puzzle is hooking up the routes. Open `app/routes.js` and add the following:
 
 ```diff
  export default function routes() {
@@ -262,7 +264,7 @@ This is a JSON:API response for a single record. Let’s talk about what’s goi
 - The record contains an `id` property giving the record’s publicly-exposed ID, which by default is the database integer ID. But JSON:API IDs are always exposed as strings, to allow for the possibility of slugs or UUIDs.
 - Even if you can infer the type of the record from context, JSON:API records always have a `type` field recording which type they are. In some contexts, records of different types will be intermixed in an array, so this keeps them distinct.
 - `attributes` is an object containing all the attributes we exposed. They are nested instead of directly on the record to avoid colliding with other standard JSON:API properties like `type`.
-- `relationships` provides data on the relationships for this record. In this case, the record has a `restaurant` relationship. We're given a "resource identifier object," containing the type and ID of the record, but not its attributes.
+- `relationships` provides data on the relationships for this record. In this case, the record has a `dishes` relationship, but it doesn't have any related records in it yet.
 
 Now that we have a restaurant, let's retrieve the data for it. In a new tab, send a GET request to `http://localhost:4000/restaurants`. You should get the following response:
 
