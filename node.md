@@ -220,13 +220,13 @@ Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to 
 
 ```json
 {
-	"data": {
+  "data": {
     "type": "restaurants",
-	  "attributes": {
-	    "name": "Sushi Place",
+    "attributes": {
+      "name": "Sushi Place",
       "address": "123 Main Street"
-	  }
-	}
+    }
+  }
 }
 ```
 
@@ -305,21 +305,21 @@ Let’s see how we can create related data as well. To add a new dish associated
 
 ```json
 {
-	"data": {
-	  "type": "dishes",
-	  "attributes": {
-	    "name": "Volcano Roll",
-	    "rating": 4
-	  },
-	  "relationships": {
-  		"restaurant": {
-  		  "data": {
-    			"type": "restaurants",
-    			"id": "1"
-  		  }
-  		}
-	  }
-	}
+  "data": {
+    "type": "dishes",
+    "attributes": {
+      "name": "Volcano Roll",
+      "rating": 4
+    },
+    "relationships": {
+      "restaurant": {
+        "data": {
+          "type": "restaurants",
+          "id": "1"
+        }
+      }
+    }
+  }
 }
 ```
 
