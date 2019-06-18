@@ -15,6 +15,7 @@ Create a new Rails app:
 
 ```bash
 $ rails new --api opinion_ate
+$ cd opinion_ate
 ```
 
 This will create an app configured to store data in a [SQLite][sqlite] database, which is just a flat file. This is the simplest way to go for experimentation purposes. If you'd like to use another SQL database like Postgres or MySQL, the `--database=` flag can be used. Run `rails new --help` to see a list of valid options for the flag.
