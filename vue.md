@@ -94,10 +94,10 @@ Let's set up the index route to display a list of the restaurants.
 
 First, delete the `<style>` tag from `App.vue` to remove the default styling.
 
-Then, replace the content of `src/components/Home.vue` with the following:
+Then, replace the content of `src/views/Home.vue` with the following:
 
 ```html
-<template>
+{% raw %}<template>
   <div>
     <ul>
       <li
@@ -129,7 +129,7 @@ export default {
     }),
   },
 };
-</script>
+</script>{% endraw %}
 ```
 
 Notice a few things:
@@ -294,6 +294,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: 'restaurant-detail',
   methods: {
+  },
   computed: {
   }
 };
@@ -328,6 +329,10 @@ Then let's use that ID to load the restaurant with that ID when the component mo
 Then let's make that loaded restaurant easily available as a computed property:
 
 ```diff
+ computed: {
++  ...mapGetters({
++    restaurantById: 'restaurants/byId',
++  })
    restaurantId() {
      return this.$route.params.id;
    },
@@ -340,11 +345,11 @@ Then let's make that loaded restaurant easily available as a computed property:
 Now we can access that restaurant in the template:
 
 ```html
-<template>
+{% raw %}<template>
   <div v-if="restaurant">
     <h1>{{ restaurant.attributes.name }}</h1>
   </div>
-</template>
+</template>{% endraw %}
 ```
 
 Now to load the dishes related to the restaurant, we'll follow fairly analogus steps.
@@ -387,13 +392,13 @@ Then we make that loaded dishes easily available as a computed property:
 Now we add those dishes to the template:
 
 ```html
-<ul>
+{% raw %}<ul>
   <li v-for="dish in dishes" :key="dish.id">
     {{ dish.attributes.name }}
     -
     {{ dish.attributes.rating }} stars
   </li>
-</ul>
+</ul>{% endraw %}
 ```
 
 Finally, let's link each restaurant in the list to its detail page:
