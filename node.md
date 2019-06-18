@@ -12,7 +12,7 @@ To try it out, let's create a web service for rating dishes at restaurants. We'l
 First, install Lux globally:
 
 ```bash
-$ npm install -g lux
+$ npm install -g lux-framework
 ```
 
 Create a new Lux app:
