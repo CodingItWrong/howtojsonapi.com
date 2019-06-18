@@ -199,7 +199,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-To set up a DJA web service, first we need to create "serializers", which translate models model to their end-user-facing format. Create an `opinion_ate/serializers.py` file, then add the following contents:
+To set up a DJA web service, first we need to create "serializers", which translate models to their end-user-facing format. Create an `opinion_ate/serializers.py` file, then add the following contents:
 
 ```python
 from rest_framework_json_api import serializers
