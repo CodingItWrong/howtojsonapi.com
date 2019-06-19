@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   The Fullstack Tutorial for JSON:API
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: howtojsonapi
+# twitter_username: howtojsonapi
 # github_username:
 google_analytics: 'UA-141698582-1'
 
