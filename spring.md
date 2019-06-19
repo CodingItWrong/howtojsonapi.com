@@ -280,6 +280,8 @@ We’ve seen a ton of help Crnk has provided us: the ability to create, read, up
 
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
+*Special thanks to Harry Pritchett for his help with this tutorial!*
+
 [crnk]: http://www.crnk.io/
 [firefox]: https://getfirefox.com
 [initializr]: https://start.spring.io/
