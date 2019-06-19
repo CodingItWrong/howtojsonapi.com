@@ -413,7 +413,7 @@ If you’d like to try out updating and deleting records:
 - Make a `DELETE` request to `https://localhost:5001/restaurants/3` with no body to delete the record.
 
 ## There’s More
-We’ve seen a ton of help JSON API .Net Core has provided us: the ability to create, read, update, and delete records, including record relationships. But it offers a lot more too! It automatically exposes Rails validation errors, allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the JSON API .Net Core guide][json-api-dotnet-core].
+We’ve seen a ton of help JSON API .Net Core has provided us: the ability to create, read, update, and delete records, including record relationships. But it offers a lot more too! It allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the JSON API .Net Core guide][json-api-dotnet-core].
 
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
