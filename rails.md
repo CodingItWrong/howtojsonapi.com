@@ -285,8 +285,8 @@ This is a JSON:API response for a single record. Let’s talk about what’s goi
 - Even if you can infer the type of the record from context, JSON:API records always have a `type` field recording which type they are. In some contexts, records of different types will be intermixed in an array, so this keeps them distinct.
 - `attributes` is an object containing all the attributes we exposed. They are nested instead of directly on the record to avoid colliding with other standard JSON:API properties like `type`.
 - `relationships` provides data on the relationships for this record. In this case, the record has a `dishes` relationship. Two `links` are provided to get data related to that relationship:
-	- The `self` link conceptually provides the relationships themselves, which is to say just the IDs of the related records
-	- The `related` link provides the full related records.
+  - The `self` link conceptually provides the relationships themselves, which is to say just the IDs of the related records
+  - The `related` link provides the full related records.
 
 Try visiting the `related` link, `http://localhost:3000/restaurants/1/dishes`, in the browser. You’ll see the following:
 
@@ -349,13 +349,13 @@ Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to 
 
 ```json
 {
-	"data": {
+  "data": {
     "type": "restaurants",
-	  "attributes": {
-	    "name": "Spaghetti Place",
+    "attributes": {
+      "name": "Spaghetti Place",
       "address": "789 Third Street"
-	  }
-	}
+    }
+  }
 }
 ```
 
@@ -393,21 +393,21 @@ Let’s see how we can create related data as well. To add a new dish associated
 
 ```json
 {
-	"data": {
-	  "type": "dishes",
-	  "attributes": {
-	    "name": "Chicken Fettucine Alfredo",
-	    "rating": 4
-	  },
-	  "relationships": {
-  		"restaurant": {
-  		  "data": {
-    			"type": "restaurants",
-    			"id": "3"
-  		  }
-  		}
-	  }
-	}
+  "data": {
+    "type": "dishes",
+    "attributes": {
+      "name": "Chicken Fettucine Alfredo",
+      "rating": 4
+    },
+    "relationships": {
+      "restaurant": {
+        "data": {
+          "type": "restaurants",
+          "id": "3"
+        }
+      }
+    }
+  }
 }
 ```
 

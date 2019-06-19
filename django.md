@@ -377,14 +377,14 @@ Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to 
 
 ```json
 {
-	"data": {
+  "data": {
     "type": "Restaurant",
-	  "attributes": {
-	    "name": "Spaghetti Place",
+    "attributes": {
+      "name": "Spaghetti Place",
       "address": "789 Third Street",
       "dish_set": []
-	  }
-	}
+    }
+  }
 }
 ```
 

@@ -49,7 +49,7 @@ Next, we want to use `@reststate/mobx` to create stores for handling restaurants
 
 Next, we need to get a token to authenticate with. We aren't going to build a login form as part of this tutorial. Instead, use a web service client app like [Postman](https://www.getpostman.com/) to send the following request:
 
-```
+```http
 POST https://sandboxapi.reststate.org/oauth/token
 
 grant_type=password
@@ -217,7 +217,7 @@ export default class NewRestaurantForm extends Component {
   }
 
   render() {
-    const { name, address } = this.state
+    const { name, address } = this.state;
     return (
       <View>
         <TextInput
@@ -249,7 +249,7 @@ Now let's hook this form up to our store:
  const initialState = {
 ...
    createRestaurant = async () => {
-+    const { name, address } = this.state
++    const { name, address } = this.state;
 +    await restaurantStore.create({
 +      attributes: { name, address },
 +    });
@@ -284,24 +284,18 @@ We said earlier that wrapping `RestaurantList` in `mobx-react`'s `observer()` fu
 Next, let's make a way to delete restaurants. Add a delete button to each list item:
 
 ```diff
-{% raw %} <FlatList
-   data={restaurantStore.all().slice()}
-   keyExtractor={(item) => item.id}
-   renderItem={({ item: restaurant }) => (
-     <View style={{
-       flex: 1,
-       flexDirection: 'row',
-       justifyContent: 'space-between',
-       alignItems: 'center',
-     }}>
-       <Text>{restaurant.attributes.name}</Text>
-+      <Button
-+        title="Delete"
-+        onPress={() => restaurant.delete()}
-+      />
-     </View>
-   )}
- />{% endraw %}
+{% raw %} <View style={{
+   flex: 1,
+   flexDirection: 'row',
+   justifyContent: 'space-between',
+   alignItems: 'center',
+ }}>
+   <Text>{restaurant.attributes.name}</Text>
++  <Button
++    title="Delete"
++    onPress={() => restaurant.delete()}
++  />
+ </View>{% endraw %}
 ```
 
 This is all we need to do; the `restaurant` is a rich object with methods like `delete()` that will make the appropriate web service request and update the local store. Try it out and you can delete records from your list.
@@ -356,7 +350,7 @@ Next, when the component mounts let's retrieve the related dishes from the store
 
 ```diff
  componentDidMount() {
-+  const restaurant = this.props.navigation.getParam('restaurant')
++  const restaurant = this.props.navigation.getParam('restaurant');
 +  dishStore.loadRelated({ parent: restaurant });
  }
 ```
@@ -365,7 +359,7 @@ Now we access those dishes in the render method:
 
 ```diff
  render() {
-+  const restaurant = this.props.navigation.getParam('restaurant')
++  const restaurant = this.props.navigation.getParam('restaurant');
 +  const dishes = dishStore.related({ parent: restaurant });
 +  return (
 +    <FlatList

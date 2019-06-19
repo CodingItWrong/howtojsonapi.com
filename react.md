@@ -35,7 +35,7 @@ Next, we want to use `@reststate/mobx` to create stores for handling restaurants
 
 Next, we need to get a token to authenticate with. We aren't going to build a login form as part of this tutorial. Instead, use a web service client app like [Postman](https://www.getpostman.com/) to send the following request:
 
-```
+```http
 POST https://sandboxapi.reststate.org/oauth/token
 
 grant_type=password
@@ -132,13 +132,11 @@ class RestaurantList extends Component {
     return (
       <div>
         <ul>
-          {
-            restaurantStore.all().map(restaurant => (
-              <li key={restaurant.id}>
-                {restaurant.attributes.name}
-              </li>
-            ))
-          }
+          {restaurantStore.all().map(restaurant => (
+            <li key={restaurant.id}>
+              {restaurant.attributes.name}
+            </li>
+          ))}
         </ul>
       </div>
     );
@@ -239,7 +237,7 @@ Now let's hook this form up to our store:
    createRestaurant = async (event) => {
 +    event.preventDefault();
 +
-+    const { name, address } = this.state
++    const { name, address } = this.state;
 +    await restaurantStore.create({
 +      attributes: { name, address },
 +    });

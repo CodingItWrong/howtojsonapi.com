@@ -36,11 +36,11 @@ using JsonApiDotNetCore.Models;
 
 public class Restaurant : Identifiable
 {
-  [Attr("name")]
-  public string Name { get; set; }
+    [Attr("name")]
+    public string Name { get; set; }
 
-  [Attr("address")]
-  public string Address { get; set; }
+    [Attr("address")]
+    public string Address { get; set; }
 }
 ```
 
@@ -53,34 +53,34 @@ using JsonApiDotNetCore.Models;
 
 public class Dish : Identifiable
 {
-  [Attr("name")]
-  public string Name { get; set; }
+    [Attr("name")]
+    public string Name { get; set; }
 
-  [Attr("rating")]
-  public int Rating { get; set; }
+    [Attr("rating")]
+    public int Rating { get; set; }
 }
 ```
 
 Now that our two models exist, we can connect them to one another. In `Dish.cs` add the following fields to give it a reference to a `Restaurant`:
 
 ```diff
-   [Attr("rating")]
-   public int Rating { get; set; }
+     [Attr("rating")]
+     public int Rating { get; set; }
 +
-+  [HasOne("restaurant")]
-+  public virtual Restaurant Restaurant { get; set; }
-+  public int RestaurantId { get; set; }
++    [HasOne("restaurant")]
++    public virtual Restaurant Restaurant { get; set; }
++    public int RestaurantId { get; set; }
  }
 ```
 
 Now let's add a collection of `Dish`es to `Restaurant`:
 
 ```diff
-   [Attr("address")]
-   public string Address { get; set; }
+     [Attr("address")]
+     public string Address { get; set; }
 +
-+  [HasMany("dishes")]
-+  public virtual List<Dish> Dishes { get; set; }
++    [HasMany("dishes")]
++    public virtual List<Dish> Dishes { get; set; }
  }
 ```
 
@@ -91,11 +91,11 @@ using Microsoft.EntityFrameworkCore;
 
 public class AppDbContext : DbContext
 {
-  public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-  public DbSet<Restaurant> Restaurants { get; set; }
+    public DbSet<Restaurant> Restaurants { get; set; }
 
-  public DbSet<Dish> Dishes { get; set; }
+    public DbSet<Dish> Dishes { get; set; }
 }
 ```
 
@@ -104,15 +104,15 @@ Let's hook up this `DbContext` in our `Startup.cs` file. For the sake of this tu
 ```diff
 +using Microsoft.EntityFrameworkCore;
 ...
-   public void ConfigureServices(IServiceCollection services)
-   {
-     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+     public void ConfigureServices(IServiceCollection services)
+     {
+         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 +
-+    services.AddDbContext<AppDbContext>(opt =>
-+    {
-+      opt.UseInMemoryDatabase("OpinionAte");
-+    });
-   }
++        services.AddDbContext<AppDbContext>(opt =>
++        {
++            opt.UseInMemoryDatabase("OpinionAte");
++        });
+     }
 ```
 
 Now that our models are set up, we can create some records. When using JANC, a convenient place to seed the database is in the `Startup.Configure()` method:
@@ -121,41 +121,41 @@ Now that our models are set up, we can create some records. When using JANC, a c
 -public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 +public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
  {
-   if (env.IsDevelopment())
+     if (env.IsDevelopment())
 ...
-   }
+     }
 
-+  context.Database.EnsureCreated();
-+  if (context.Restaurants.Any() == false)
-+  {
-+    Restaurant sushiPlace = new Restaurant { Name = "Sushi Place" };
-+    Restaurant burgerPlace = new Restaurant { Name = "Burger Place" };
-+    context.Restaurants.Add(sushiPlace);
-+    context.Restaurants.Add(burgerPlace);
-+    context.SaveChanges();
++    context.Database.EnsureCreated();
++    if (context.Restaurants.Any() == false)
++    {
++        Restaurant sushiPlace = new Restaurant { Name = "Sushi Place" };
++        Restaurant burgerPlace = new Restaurant { Name = "Burger Place" };
++        context.Restaurants.Add(sushiPlace);
++        context.Restaurants.Add(burgerPlace);
++        context.SaveChanges();
 +
-+    context.Dishes.Add(new Dish {
-+      Restaurant = sushiPlace,
-+      Name = "California Roll"
-+    });
++        context.Dishes.Add(new Dish {
++            Restaurant = sushiPlace,
++            Name = "California Roll"
++        });
 +
-+    context.Dishes.Add(new Dish {
-+      Restaurant = sushiPlace,
-+      Name = "Volcano Roll"
-+    });
++        context.Dishes.Add(new Dish {
++            Restaurant = sushiPlace,
++            Name = "Volcano Roll"
++        });
 +
-+    context.Dishes.Add(new Dish {
-+      Restaurant = burgerPlace,
-+      Name = "Barbecue Burger",
-+    });
++        context.Dishes.Add(new Dish {
++            Restaurant = burgerPlace,
++            Name = "Barbecue Burger",
++        });
 +
-+    context.Dishes.Add(new Dish {
-+      Restaurant = burgerPlace,
-+      Name = "Slider"
-+    });
++        context.Dishes.Add(new Dish {
++            Restaurant = burgerPlace,
++            Name = "Slider"
++        });
 +
-+    context.SaveChanges();
-+  }
++        context.SaveChanges();
++    }
 ...
  }
 ```
@@ -175,12 +175,12 @@ using Microsoft.Extensions.Logging;
 
 public class RestaurantsController : JsonApiController<Restaurant>
 {
-  public RestaurantsController(
-    IJsonApiContext jsonApiContext,
-    IResourceService<Restaurant> resourceService,
-    ILoggerFactory loggerFactory)
-    : base(jsonApiContext, resourceService, loggerFactory)
-  { }
+    public RestaurantsController(
+        IJsonApiContext jsonApiContext,
+        IResourceService<Restaurant> resourceService,
+        ILoggerFactory loggerFactory)
+        : base(jsonApiContext, resourceService, loggerFactory)
+    { }
 }
 ```
 
@@ -195,12 +195,12 @@ using Microsoft.Extensions.Logging;
 
 public class DishesController : JsonApiController<Dish>
 {
-  public DishesController(
-    IJsonApiContext jsonApiContext,
-    IResourceService<Dish> resourceService,
-    ILoggerFactory loggerFactory)
-    : base(jsonApiContext, resourceService, loggerFactory)
-  { }
+    public DishesController(
+        IJsonApiContext jsonApiContext,
+        IResourceService<Dish> resourceService,
+        ILoggerFactory loggerFactory)
+        : base(jsonApiContext, resourceService, loggerFactory)
+    { }
 }
 ```
 
@@ -209,25 +209,25 @@ Now we just need to hook up JANC when our app boots. Add the following lines to 
 ```diff
 +using JsonApiDotNetCore.Extensions;
 ...
-   public void ConfigureServices(IServiceCollection services)
-   {
-     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-     services.AddDbContext<AppDbContext>(options =>
+     public void ConfigureServices(IServiceCollection services)
      {
-       options.UseInMemoryDatabase("OpinionAte");
-     });
+         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+         services.AddDbContext<AppDbContext>(options =>
+         {
+             options.UseInMemoryDatabase("OpinionAte");
+         });
 +
-+    services.AddJsonApi<AppDbContext>();
-   }
++        services.AddJsonApi<AppDbContext>();
+     }
 ...
-   public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
-   {
+     public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext context)
+     {
 ...
-     app.UseHttpsRedirection();
-     app.UseMvc();
-+    app.UseJsonApi();
-   }
+         app.UseHttpsRedirection();
+         app.UseMvc();
++        app.UseJsonApi();
+     }
 ```
 
 Now, our app should be set. The `JsonApiController` subclasses we created will set up all necessary routes. For example, for restaurants, the following main routes are created:
@@ -346,13 +346,13 @@ Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to 
 
 ```json
 {
-	"data": {
+  "data": {
     "type": "restaurants",
-	  "attributes": {
-	    "name": "Spaghetti Place",
+    "attributes": {
+      "name": "Spaghetti Place",
       "address": "789 Third Street"
-	  }
-	}
+    }
+  }
 }
 ```
 
@@ -387,21 +387,21 @@ Let’s see how we can create related data as well. To add a new dish associated
 
 ```json
 {
-	"data": {
-	  "type": "dishes",
-	  "attributes": {
-	    "name": "Chicken Fettucine Alfredo",
-	    "rating": 4
-	  },
-	  "relationships": {
-  		"restaurant": {
-  		  "data": {
-    			"type": "restaurants",
-    			"id": "3"
-  		  }
-  		}
-	  }
-	}
+  "data": {
+    "type": "dishes",
+    "attributes": {
+      "name": "Chicken Fettucine Alfredo",
+      "rating": 4
+    },
+    "relationships": {
+      "restaurant": {
+        "data": {
+          "type": "restaurants",
+          "id": "3"
+        }
+      }
+    }
+  }
 }
 ```
 

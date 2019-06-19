@@ -28,7 +28,7 @@ Next, we want to use `@reststate/vuex` to create Vuex store modules for handling
 
 Next, we need to get a token to authenticate with. We aren't going to build a login form as part of this tutorial. Instead, use a web service client app like [Postman](https://www.getpostman.com/) to send the following request:
 
-```
+```http
 POST https://sandboxapi.reststate.org/oauth/token
 
 grant_type=password
@@ -246,13 +246,13 @@ Run the app and you should be able to submit a new restaurant, and it should app
 Next, let's make a way to delete restaurants. Add a delete button to each list item:
 
 ```diff
-         :key="restaurant.id"
+{% raw %}         :key="restaurant.id"
        >
          {{ restaurant.attributes.name }}
 +        <button @click="deleteRestaurant(restaurant)">
 +          Delete
 +        </button>
-       </li>
+       </li>{% endraw %}
 ```
 
 Map the `delete` action:
