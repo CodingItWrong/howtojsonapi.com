@@ -5,7 +5,7 @@ logo: /images/dotnetcore.svg
 logo_alt: .NET Core logo
 ---
 
-[JSON API .Net Core][json-api-dotnet-core] is a library for creating JSON:API backends in Java, and features integration with Spring Framework.
+[JSON API .Net Core][json-api-dotnet-core] is a library for creating JSON:API backends in .NET Core.
 
 First, [install .NET Core][install-dotnet-core].
 
