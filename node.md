@@ -9,6 +9,8 @@ logo_alt: Node.js logo
 
 To try it out, let's create a web service for rating dishes at restaurants. We'll call it "Opinion Ate".
 
+_Looking for something slightly different? Check the official JSON:API implementations page for [alternative Node.js server libraries][jsonapi-js-servers]._
+
 First, install Lux globally:
 
 ```bash
@@ -367,6 +369,7 @@ We’ve seen a ton of help Lux has provided us: the ability to create, read, upd
 
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
+[jsonapi-js-servers]: https://jsonapi.org/implementations/#server-libraries-node-js
 [lux]: https://lux.postlight.com/
 [postman]: https://www.getpostman.com/
 [sqlite]: https://www.sqlite.org/index.html
