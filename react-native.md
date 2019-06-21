@@ -9,6 +9,8 @@ logo_alt: React logo
 
 To try it out, let's create a React Native webapp for rating dishes at restaurants. We'll call it "Opinion Ate".
 
+_Looking for something slightly different? Check the official JSON:API implementations page for [alternative JavaScript implementations][jsonapi-js-clients]._
+
 Create a new app using React Native CLI:
 
 ```sh
@@ -407,4 +409,5 @@ With that, our tutorial is complete. Notice how much functionality we got withou
 
 Now that you have a JSON:API frontend, you should try creating your own backend to power it. Choose a tutorial from the [How to JSON:API home page](/)!
 
+[jsonapi-js-clients]: https://jsonapi.org/implementations/#client-libraries-javascript
 [reststate-mobx]: https://mobx.reststate.org
