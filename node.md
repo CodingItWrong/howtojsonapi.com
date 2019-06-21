@@ -26,7 +26,7 @@ $ cd opinion-ate
 
 This will create an app configured to store data in a [SQLite][sqlite] database, which is just a flat file. This is the simplest way to go for experimentation purposes.
 
-## Models
+## Our First Resource
 JSON:API represents the data in your apps as "resources", and Lux provides a single command to set up everything you need for a given resource. First let’s create a resource representing a restaurant. Run the following command in the terminal:
 
 ```bash
@@ -129,6 +129,7 @@ This will set up all necessary routes for restaurants:
 - PATCH or PUT /restaurants/:id — updates a restaurant
 - DELETE /restaurants/:id — deletes a restaurant
 
+## A Related Resource
 Next, let’s create a dish resource:
 
 ```bash
