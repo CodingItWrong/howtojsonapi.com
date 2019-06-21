@@ -423,6 +423,12 @@ We’ve seen a ton of help JSONAPI::Resources has provided us: the ability to cr
 
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
+## More Options
+
+Instead of JSONAPI::Resources, you can try:
+
+- [Graphiti](https://www.graphiti.dev/guides/), an all-in-one backend including a graphical browser, additional enhancements beyond the JSON:API spec, and a tailored JavaScript client
+
 [firefox]: https://getfirefox.com
 [install-rails]: https://guides.rubyonrails.org/getting_started.html
 [jr]: http://jsonapi-resources.com/v0.9/guide/resources.html

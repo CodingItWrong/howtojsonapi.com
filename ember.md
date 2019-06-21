@@ -322,4 +322,10 @@ With that, our tutorial is complete. Notice how much functionality we got withou
 
 Now that you have a JSON:API frontend, you should try creating your own backend to power it. Choose a tutorial from the [How to JSON:API home page](/)!
 
+## More Options
+
+Instead of Ember Data, you can try:
+
+- [ember-orbit](https://github.com/orbitjs/ember-orbit), a more advanced client including offline storage and synchronization
+
 [ember]: https://emberjs.com
