@@ -9,7 +9,7 @@ logo_alt: React logo
 
 To try it out, let's create a React webapp for rating dishes at restaurants. We'll call it "Opinion Ate".
 
-_Looking for something slightly different? Check the official JSON:API implementations page for [alternative JavaScript implementations][jsonapi-js-clients]._
+_Looking for something slightly different? Check the official JSON:API implementations page for [alternative JavaScript clients][jsonapi-js-clients]._
 
 Create a new React app using [Create React App](https://facebook.github.io/create-react-app/):
 
