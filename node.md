@@ -27,17 +27,17 @@ $ cd opinion-ate
 This will create an app configured to store data in a [SQLite][sqlite] database, which is just a flat file. This is the simplest way to go for experimentation purposes.
 
 ## Models
-Lux persists data to the database using classes called Models.
-
-First let’s create a model representing a restaurant. Run the following command in the terminal:
+JSON:API represents the data in your apps as "resources", and Lux provides a single command to set up everything you need for a given resource. First let’s create a resource representing a restaurant. Run the following command in the terminal:
 
 ```bash
-$ lux generate model restaurant name:string address:string
+$ lux generate resource restaurant name:string address:string
 ```
 
-This tells Lux to create a new model called `restaurant` and to define two `string` fields on it: `name` and `address`.
+This tells Lux to create a new resource called `restaurant` and to define two `string` fields on it: `name` and `address`.
 
-The generator created a number of files; let’s take a look at a few of them. First, open the file in `db/migrate` that ends with `-create-restaurants.js` — the date on the file will be different than mine, showing the time you ran the command.
+The generator created a number of files; let’s take a look at each of them.
+
+First, open the file in `db/migrate` that ends with `-create-restaurants.js` — the date on the file will be different than mine, showing the time you ran the command.
 
 ```javascript
 export function up(schema) {
@@ -79,13 +79,65 @@ export default Restaurant;
 
 That’s…pretty empty. We have a `Restaurant` class that inherits from `Model`, but nothing else. This represents a Restaurant record, but how does it know what columns are available? Lux will automatically inspect the table to see what columns are defined on it and make those columns available; no configuration is needed.
 
-Now let’s set up the model for a dish itself:
+Next, take a look at `app/serializers/restaurant.js`:
+
+```javascript
+import { Serializer } from 'lux-framework';
+
+class RestaurantsSerializer extends Serializer {
+  attributes = [
+    'name',
+    'address'
+  ];
+}
+
+export default RestaurantsSerializer;
+```
+
+Serializers translate models to their end-user-facing format. In this case, `name` and `address` are configured as columns that should be made available to end users. If we wanted some columns to only be used on the backend, we could remove them from the serializer.
+
+Finally, take a look at `app/controllers/restaurants.js`:
+
+```javascript
+import { Controller } from 'lux-framework';
+
+class RestaurantsController extends Controller {
+  params = [
+    'name',
+    'address'
+  ];
+}
+
+export default RestaurantsController;
+```
+
+For security purposes, controllers don't allow just any arbitrary parameters to be passed in; they need to be explicitly listed in the `params` property. If we wanted some columns to be read-only we could remove them from here.
+
+The last piece of the puzzle that was set up for us is the route. Check out `app/routes.js`:
+
+```javascript
+export default function routes() {
+  this.resource('restaurants');
+}
+```
+
+This will set up all necessary routes for restaurants:
+
+- GET /restaurants — lists all the restaurants
+- POST /restaurants — creates a new restaurant
+- GET /restaurants/:id — gets one restaurant
+- PATCH or PUT /restaurants/:id — updates a restaurant
+- DELETE /restaurants/:id — deletes a restaurant
+
+Next, let’s create a dish resource:
 
 ```bash
-$ lux generate model dish name:string rating:integer restaurant_id:integer
+$ lux generate resource dish name:string rating:integer restaurant_id:integer
 ```
 
 You’ve seen a `string` column before, and you can probably guess what `integer` does. We create a `rating` column, as well as a `restaurant_id` that creates a foreign key column that references another model, in this case Restaurant.
+
+This command generates a model, serializer, and controller for `Dish`es, and added the appropriate route.
 
 Go ahead and migrate the database again:
 
@@ -117,96 +169,49 @@ And add a `belongsTo` field to `Dish` indicating that it belongs to a restaurant
  }
 ```
 
-## Setting Up the Web Service
-
-Now that we’ve got our data all set, let’s set up Lux so we can access it via a web service. First we need to create "serializers", which translate models to their end-user-facing format.
-
-Generate a serializer for each model:
-
-```bash
-$ lux generate serializer restaurant
-$ lux generate serializer dish
-```
-
-First add the following to the generated `app/serializers/restaurant.js`:
+We also need to add these relationships to the serializers. First, `app/serializers/restaurant.js`:
 
 ```diff
- import { Serializer } from 'lux-framework';
-
  class RestaurantsSerializer extends Serializer {
-+  attributes = ['name', 'address'];
+   attributes = [
+     'name',
+     'address'
+   ];
 +  hasMany = ['dishes'];
  }
-
- export default RestaurantsSerializer;
 ```
 
 Add similar entries to `app/serializers/dish.js`:
 
 ```diff
- import { Serializer } from 'lux-framework';
-
  class DishesSerializer extends Serializer {
-+  attributes = ['name', 'rating'];
+   attributes = [
+     'name',
+     'rating',
+     'restaurantId'
+   ];
 +  hasOne = ['restaurant'];
  }
-
- export default DishesSerializer;
 ```
 
 Note that although the model uses `belongsTo`, the serializer uses `hasOne`.
 
-Now that our serializers are set, we need to create controllers that handle the HTTP requests for restaurants and dishes:
-
-```bash
-$ lux generate controller restaurant
-$ lux generate controller dish
-```
-
-For security purposes, controllers don't allow just any arbitrary parameters to be passed in; we need to indicate which can be sent. Add the following to `app/controllers/restaurants.js`:
+Finally, make one change to `app/controllers/dishes.js`:
 
 ```diff
- import { Controller } from 'lux-framework';
-
- class RestaurantsController extends Controller {
-+  params = ['name', 'address'];
- }
-
- export default RestaurantsController;
-```
-
-And the following to `app/controllers/dishes.js`:
-
-```diff
- import { Controller } from 'lux-framework';
-
  class DishesController extends Controller {
-+  params = ['name', 'rating', 'restaurant'];
- }
-
- export default DishesController;
-```
-
-Note that the `restaurant` relationship is listed in the `params` along with the plain attributes.
-
-The last piece of the puzzle is hooking up the routes. Open `app/routes.js` and add the following:
-
-```diff
- export default function routes() {
-+  this.resource('restaurants');
-+  this.resource('dishes');
+   params = [
+     'name',
+     'rating',
+-    'restaurantId'
++    'restaurant'
+   ];
  }
 ```
 
-This will set up all necessary routes. For example, for restaurants, the following main routes are created:
+Instead of sending in the restaurant ID field, we'll be sending in the `restaurant` as a relationship.
 
-- GET /restaurants — lists all the restaurants
-- POST /restaurants — creates a new restaurant
-- GET /restaurants/:id — gets one restaurant
-- PATCH or PUT /restaurants/:id — updates a restaurant
-- DELETE /restaurants/:id — deletes a restaurant
-
-That’s a lot we’ve gotten without having to write almost any code!
+With that, we're done building out our app, and we hardly had to write any code!
 
 ## Trying It Out
 
