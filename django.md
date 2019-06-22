@@ -257,7 +257,7 @@ This will hook up all necessary URLs. For example, for restaurants, the followin
 - GET /restaurants/ — lists all the restaurants
 - POST /restaurants/ — creates a new restaurant
 - GET /restaurants/:id — gets one restaurant
-- PATCH or PUT /restaurants/:id — updates a restaurant
+- PATCH /restaurants/:id — updates a restaurant
 - DELETE /restaurants/:id — deletes a restaurant
 
 That’s a lot we’ve gotten without having to write almost any code!

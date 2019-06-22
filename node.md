@@ -126,7 +126,7 @@ This will set up all necessary routes for restaurants:
 - GET /restaurants — lists all the restaurants
 - POST /restaurants — creates a new restaurant
 - GET /restaurants/:id — gets one restaurant
-- PATCH or PUT /restaurants/:id — updates a restaurant
+- PATCH /restaurants/:id — updates a restaurant
 - DELETE /restaurants/:id — deletes a restaurant
 
 ## A Related Resource
