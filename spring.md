@@ -15,7 +15,9 @@ The easiest way to create a new Spring Boot project is with [Spring Initializr][
 - Language: Java
 - Spring Boot: (leave as default)
 - Artifact: "opinion-ate"
-- Dependencies: search for "web", then add "Spring Web Starter"
+- Dependencies:
+  - Search for "web", then add "Spring Web Starter"
+  - Search for "lombok", then add "Lombok"
 
 Click "Generate the project"; this will download a zip file. Expand it.
 
@@ -39,6 +41,8 @@ Your project's dependencies are configured in `build.gradle`. To add Crnk to you
 
  dependencies {
      implementation 'org.springframework.boot:spring-boot-starter-web'
+     compileOnly 'org.projectlombok:lombok'
+     annotationProcessor 'org.projectlombok:lombok'
      testImplementation 'org.springframework.boot:spring-boot-starter-test'
 +    compile 'io.crnk:crnk-setup-spring-boot2'
 +    compile 'io.crnk:crnk-home'
@@ -58,7 +62,13 @@ package com.example.opinionate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.crnk.core.resource.annotations.JsonApiId;
 import io.crnk.core.resource.annotations.JsonApiResource;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @JsonApiResource(type = "restaurants")
 public class Restaurant {
 
@@ -70,8 +80,6 @@ public class Restaurant {
 
     @JsonProperty
     private String address;
-
-    public Restaurant() {}
 }
 ```
 
@@ -85,10 +93,13 @@ The `@JsonApiResource` annotation indicates to Crnk that this class is a type of
 
 That’s a lot we’ve gotten without having to write almost any code!
 
-We also need a constructor with all properties, getters, and setters for these fields. Right-click anywhere in your file then choose "Generate…". A modal will appear prompting you to "Choose Fields to Initialize by Constructor". Shift-click to select all the fields, then click OK. IntelliJ will add the following constructor:
+The Lombok annotations `@Getter`, `@Setter`, and `@NoArgsConstructor` will create the corresponding getters, setters, and no-arg constructor that we'll use to work with this class.
+
+We also need a constructor with all of these fields. Right-click anywhere in your file then choose "Generate…". A modal will appear prompting you to "Choose Fields to Initialize by Constructor". Shift-click to select all the fields, then click OK. IntelliJ will add the following constructor:
 
 ```diff
-     public Restaurant() {}
+     @JsonProperty
+     private String address;
 +
 +    public Restaurant(Long id, String name, String address) {
 +        this.id = id;
@@ -96,41 +107,6 @@ We also need a constructor with all properties, getters, and setters for these f
 +        this.address = address;
 +    }
  }
-```
-
-Right-click and choose "Generate…" again. This time, choose "Getter and Setter". Shift-click again to select all the fields, then click OK. IntelliJ will add the following getters and setters:
-
-```diff
-     public Restaurant(Long id, String name, String address) {
-         this.id = id;
-         this.name = name;
-         this.address = address;
-     }
-+
-+    public Long getId() {
-+        return id;
-+    }
-+
-+    public void setId(Long id) {
-+        this.id = id;
-+    }
-+
-+    public String getName() {
-+        return name;
-+    }
-+
-+    public void setName(String name) {
-+        this.name = name;
-+    }
-+
-+    public String getAddress() {
-+        return address;
-+    }
-+
-+    public void setAddress(String address) {
-+        this.address = address;
-+    }
-}
 ```
 
 Next we need a Repository class that will handle persisting our Restaurants. For the sake of this tutorial we'll just use an in-memory repository.
