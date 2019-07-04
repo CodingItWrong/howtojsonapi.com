@@ -30,10 +30,11 @@ This will create an app configured to store data in a [SQLite][sqlite] database,
 JSON:API represents the data in your apps as "resources", and Lux provides a single command to set up everything you need for a given resource. First let’s create a resource representing a restaurant. Run the following command in the terminal:
 
 ```bash
-$ lux generate resource restaurant name:string address:string
+$ lux generate resource restaurant name:string address:string \
+  dishes:has-many
 ```
 
-This tells Lux to create a new resource called `restaurant` and to define two `string` fields on it: `name` and `address`.
+This tells Lux to create a new resource called `restaurant` and to define three fields on it. There are two `string` fields, `name` and `address`. There's also a `has-many` relationship, which means that a restaurant can have many `dishes` associated with it.
 
 The generator created a number of files; let’s take a look at each of them.
 
@@ -71,13 +72,17 @@ Next let's look at the `app/models/restaurant.js` file created:
 import { Model } from 'lux-framework';
 
 class Restaurant extends Model {
-
+  static hasMany = {
+    dishes: {
+      inverse: 'restaurant'
+    }
+  };
 }
 
 export default Restaurant;
 ```
 
-That’s…pretty empty. We have a `Restaurant` class that inherits from `Model`, but nothing else. This represents a Restaurant record, but how does it know what columns are available? Lux will automatically inspect the table to see what columns are defined on it and make those columns available; no configuration is needed.
+We have a `Restaurant` class that inherits from `Model`. The `hasMany` relationship to `dishes` is configured on it, but there's nothing else in the class. How does Lux know what columns are available? It will automatically inspect the table to see what columns are defined on it and make those columns available; no configuration is needed.
 
 Next, take a look at `app/serializers/restaurant.js`:
 
@@ -89,12 +94,16 @@ class RestaurantsSerializer extends Serializer {
     'name',
     'address'
   ];
+
+  hasMany = [
+    'dishes'
+  ];
 }
 
 export default RestaurantsSerializer;
 ```
 
-Serializers translate models to their end-user-facing format. In this case, `name` and `address` are configured as columns that should be made available to end users. If we wanted some columns to only be used on the backend, we could remove them from the serializer.
+Serializers translate models to their end-user-facing format. In this case, `name` and `address` are configured as columns that should be made available to end users. If we wanted some columns to only be used on the backend, we could remove them from the serializer. It also specifies that the `hasMany` relationship to `dishes` should be exposed,
 
 Finally, take a look at `app/controllers/restaurants.js`:
 
@@ -104,7 +113,8 @@ import { Controller } from 'lux-framework';
 class RestaurantsController extends Controller {
   params = [
     'name',
-    'address'
+    'address',
+    'dishes'
   ];
 }
 
@@ -133,12 +143,13 @@ This will set up all necessary routes for restaurants:
 Next, let’s create a dish resource:
 
 ```bash
-$ lux generate resource dish name:string rating:integer restaurant_id:integer
+$ lux generate resource dish name:string rating:integer \
+  restaurant:belongs-to
 ```
 
-You’ve seen a `string` column before, and you can probably guess what `integer` does. We create a `rating` column, as well as a `restaurant_id` that creates a foreign key column that references another model, in this case Restaurant.
+You’ve seen a `string` column before, and you can probably guess what `integer` does. `belongs-to` is the inverse of the `has-many` relationship--it creates a foreign key column that references another model, in this case Restaurant.
 
-This command generates a model, serializer, and controller for `Dish`es, and added the appropriate route.
+This command generates a model, serializer, and controller for `Dish`es, and added the appropriate route. You can take a look at the files if you like; they're similar to the Restaurant files we looked at earlier.
 
 Go ahead and migrate the database again:
 
@@ -146,77 +157,11 @@ Go ahead and migrate the database again:
 $ lux db:migrate
 ```
 
-Although we don't need to configure columns in the model classes, we do need to specify relationships between models. Add a `hasMany` field to `Restaurant` indicating that it has many dishes:
-
-```diff
- class Restaurant extends Model {
-+  static hasMany = {
-+    dishes: {
-+      inverse: 'restaurant',
-+    },
-+  };
- }
-```
-
-And add a `belongsTo` field to `Dish` indicating that it belongs to a restaurant:
-
-```diff
- class Dish extends Model {
-+  static belongsTo = {
-+    restaurant: {
-+      inverse: 'dishes',
-+    },
-+  };
- }
-```
-
-We also need to add these relationships to the serializers. First, `app/serializers/restaurant.js`:
-
-```diff
- class RestaurantsSerializer extends Serializer {
-   attributes = [
-     'name',
-     'address'
-   ];
-+  hasMany = ['dishes'];
- }
-```
-
-Add similar entries to `app/serializers/dish.js`:
-
-```diff
- class DishesSerializer extends Serializer {
-   attributes = [
-     'name',
-     'rating',
-     'restaurantId'
-   ];
-+  hasOne = ['restaurant'];
- }
-```
-
-Note that although the model uses `belongsTo`, the serializer uses `hasOne`.
-
-Finally, make one change to `app/controllers/dishes.js`:
-
-```diff
- class DishesController extends Controller {
-   params = [
-     'name',
-     'rating',
--    'restaurantId'
-+    'restaurant'
-   ];
- }
-```
-
-Instead of sending in the restaurant ID field, we'll be sending in the `restaurant` as a relationship.
-
-With that, we're done building out our app, and we hardly had to write any code!
+With that, we're done building out our app, and we didn't have to write a single line of code--the generator handled it all for us!
 
 ## Trying It Out
 
-Now let’s give it a try. Start the Lux server:
+Now let’s give our app a try. Start the Lux server:
 
 ```bash
 $ lux serve
