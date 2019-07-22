@@ -49,7 +49,7 @@ Your project's dependencies are configured in `build.gradle`. To add Crnk to you
  }
 ```
 
-IntelliJ will let you know that your Gradle file has changed. Click "Import Changes" to download the appropriate dependencies.
+IntelliJ will let you know that "Gradle projects need to be imported". Click "Import Changes" to download the appropriate dependencies.
 
 ## Resources
 Crnk represents your data with classes annotated with `@JsonApiResource`. Let's create a resource class representing a restaurant.
