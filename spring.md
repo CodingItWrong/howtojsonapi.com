@@ -35,7 +35,7 @@ Your project's dependencies are configured in `build.gradle`. To add Crnk to you
 
 +dependencyManagement {
 +    imports {
-+        mavenBom "io.crnk:crnk-bom:2.11.20190113153635"
++        mavenBom "io.crnk:crnk-bom:3.0.20190714142556"
 +    }
 +}
 
