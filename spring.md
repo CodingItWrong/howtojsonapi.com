@@ -52,6 +52,7 @@ Your project's dependencies are configured in `build.gradle`. To add Crnk to you
 IntelliJ will let you know that "Gradle projects need to be imported". Click "Import Changes" to download the appropriate dependencies.
 
 ## Resources
+
 Crnk represents your data with classes annotated with `@JsonApiResource`. Let's create a resource class representing a restaurant.
 
 In `src/main/java`, right-click `com.example.opinionate`, then choose New > Java Class. Name it "Restaurant". Replace its contents with the following:
@@ -252,11 +253,12 @@ If you’d like to try out updating and deleting records:
 - Make a `DELETE` request to `http://localhost:8080/restaurants/3` with no body to delete the record.
 
 ## There’s More
+
 We’ve seen a ton of help Crnk has provided us: the ability to create, read, update, and delete records. But it offers a lot more too! It automatically handles related records, allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the Crnk Guide][crnk].
 
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
-*Special thanks to Harry Pritchett for his help with this tutorial!*
+_Special thanks to Harry Pritchett for his help with this tutorial!_
 
 [crnk]: http://www.crnk.io/
 [firefox]: https://getfirefox.com
