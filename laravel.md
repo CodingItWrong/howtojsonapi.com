@@ -1,6 +1,6 @@
 ---
 layout: tutorial
-title: Building a JSON:API Backend with Laravel and JSONAPI::Resources
+title: Building a JSON:API Backend with Laravel JSON API
 logo: /images/laravel.svg
 logo_alt: Laravel logo
 ---
