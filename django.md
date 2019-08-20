@@ -417,8 +417,8 @@ Our new record is created and the data is returned to us!
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `http://localhost:8000/restaurants/3`, passing in updated `attributes`.
-- Make a `DELETE` request to `http://localhost:8000/restaurants/3` with no body to delete the record.
+- Make a `PATCH` request to `http://localhost:8000/restaurants/3/`, passing in updated `attributes`.
+- Make a `DELETE` request to `http://localhost:8000/restaurants/3/` with no body to delete the record.
 
 ## There’s More
 We’ve seen a ton of help Django REST Framework JSON API has provided us: the ability to create, read, update, and delete records, including record relationships. But it offers a lot more too! It allows you to request only a subset of the fields you need, allows you to include related records in the response, as well as sorting, filtering, and pagination. To learn more, check out [the DJA Guide][dja].
