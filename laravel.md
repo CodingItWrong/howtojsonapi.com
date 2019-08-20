@@ -606,7 +606,7 @@ Our new record is created and the data is returned to us!
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `http://opinion-ate.test/api/v1/restaurants/3`, passing in updated `attributes`.
+- Make a `PATCH` request to `http://opinion-ate.test/api/v1/restaurants/3`, passing in updated `attributes`.
 - Make a `DELETE` request to `http://opinion-ate.test/api/v1/restaurants/3` with no body to delete the record.
 
 ## There’s More
