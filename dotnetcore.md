@@ -409,7 +409,7 @@ Notice that now, instead of `links` inside the relationship, we provide `data` t
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `https://localhost:5001/restaurants/3`, passing in updated `attributes`.
+- Make a `PATCH` request to `https://localhost:5001/restaurants/3`, passing in updated `attributes`.
 - Make a `DELETE` request to `https://localhost:5001/restaurants/3` with no body to delete the record.
 
 ## There’s More
