@@ -312,7 +312,7 @@ You should get the following response:
 
 If you’d like to try out updating and deleting records:
 
-- Make a `PUT` request to `http://localhost:4000/restaurants/1`, passing in updated `attributes`.
+- Make a `PATCH` request to `http://localhost:4000/restaurants/1`, passing in updated `attributes`.
 - Make a `DELETE` request to `http://localhost:4000/restaurants/1` with no body to delete the record.
 
 ## There’s More
