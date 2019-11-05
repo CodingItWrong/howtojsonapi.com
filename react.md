@@ -408,4 +408,4 @@ Instead of Reststate/Mobx, you can try:
 - [redux-json-api](https://github.com/redux-json-api/redux-json-api), for use with Redux
 - [react-orbitjs](https://orbitjs.com/), a more advanced client including offline storage and synchronization
 
-[reststate-mobx]: https://mobx.reststate.org
+[reststate-mobx]: https://mobx.reststate.codingitwrong.com/
