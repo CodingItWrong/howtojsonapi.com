@@ -19,7 +19,7 @@ gem "jekyll-theme-bootstrap", github: "codingitwrong/jekyll-theme-bootstrap", br
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.14"
+  gem "jekyll-feed", "~> 0.15"
   gem "jekyll-seo-tag"
 end
 
