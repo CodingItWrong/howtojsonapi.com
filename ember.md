@@ -17,12 +17,12 @@ $ ember new --no-welcome opinion-ate
 $ cd opinion-ate
 ```
 
-The JSON:API web service we'll be connecting to is [sandbox.howtojsonapi.com](https://sandbox.howtojsonapi.com/), a free service that allows you to create an account so you can write data as well as read it. Sign up for an account there.
+The JSON:API web service we'll be connecting to is [jsonapi-sandbox.herokuapp.com](https://jsonapi-sandbox.herokuapp.com/), a free service that allows you to create an account so you can write data as well as read it. Sign up for an account there.
 
 Next, we need to get a token to authenticate with. We aren't going to build a login form as part of this tutorial. Instead, use a web service client app like [Postman](https://www.getpostman.com/) to send the following request:
 
 ```http
-POST https://sandbox.howtojsonapi.com/oauth/token
+POST https://jsonapi-sandbox.herokuapp.com/oauth/token
 
 grant_type=password
 username=you@yourodmain.com
@@ -54,7 +54,7 @@ This creates an `app/adapters/application.js` file. Edit it to add the following
 +const accessToken = 'PASTE YOUR ACTUAL TOKEN HERE';
 
  export default DS.JSONAPIAdapter.extend({
-+  host: 'https://sandbox.howtojsonapi.com',
++  host: 'https://jsonapi-sandbox.herokuapp.com',
 +
 +  init() {
 +    this._super(...arguments);
