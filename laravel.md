@@ -93,7 +93,7 @@ class CreateRestaurantsTable extends Migration
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
         });
     }
@@ -170,7 +170,7 @@ Add the following fields to the migration:
 
 ```diff
  Schema::create('dishes', function (Blueprint $table) {
-     $table->bigIncrements('id');
+     $table->id();
 +    $table->string('name');
 +    $table->integer('rating');
 +    $table->bigInteger('restaurant_id');
