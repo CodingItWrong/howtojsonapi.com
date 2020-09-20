@@ -333,8 +333,8 @@ This creates a file `config/json-api-default.php`. We just have to configure one
 ```diff
      'resources' => [
 -        'posts' => \App\Post::class,
-+        'restaurants' => \App\Restaurant::class,
-+        'dishes' => \App\Dish::class,
++        'restaurants' => \App\Models\Restaurant::class,
++        'dishes' => \App\Models\Dish::class,
      ],
 ```
 
@@ -410,7 +410,19 @@ $ php artisan make:json-api:adapter Restaurants
 $ php artisan make:json-api:adapter Dishes
 ```
 
-Under our `app/JsonApi` folders for each model, this creates an `Adapter.php` class. First open `Restaurants/Adapter.php` and add a `dishes()` function to the `Adapter` class:
+Under our `app/JsonApi` folders for each model, this creates an `Adapter.php` class. First open `Restaurants/Adapter.php`.
+
+In the `__construct()` function, we need to update the reference to the model to use the `\App\Models` namespace that newer versions of Laravel use:
+
+```diff
+ public function __construct(StandardStrategy $paging)
+ {
+-    parent::__construct(new \App\Restaurant(), $paging);
++    parent::__construct(new \App\Models\Restaurant(), $paging);
+ }
+```
+
+We also need to add a `dishes()` function:
 
 ```php
 protected function dishes()
@@ -421,13 +433,19 @@ protected function dishes()
 
 This indicates to LJA that `dishes` is a has-many relationship.
 
-Add an analogous function to `Dishes/Adapter.php`
+Make analogous changes to `Dishes/Adapter.php`
 
-```php
-protected function restaurant()
-{
-    return $this->hasOne();
-}
+```diff
+ public function __construct(StandardStrategy $paging)
+ {
+-    parent::__construct(new \App\Dish(), $paging);
++    parent::__construct(new \App\Models\Dish(), $paging);
+ }
+...
++protected function restaurant()
++{
++    return $this->hasOne();
++}
 ```
 
 The last piece of the puzzle is hooking up the routes. Open `routes/api.php` and you’ll see the following:
