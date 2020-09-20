@@ -141,7 +141,7 @@ Migrating: 2020_09_20_122048_create_restaurants_table
 Migrated:  2020_09_20_122048_create_restaurants_table (73.07ms)
 ```
 
-Next let’s look at the `app/Restaurant.php` file created:
+Next let’s look at the `app/Models/Restaurant.php` file created:
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -207,7 +207,7 @@ Our models will automatically detect the columns on them, but to use relationshi
 +
 +    public function dishes()
 +    {
-+        return $this->hasMany('App\Dish');
++        return $this->hasMany('App\Models\Dish');
 +    }
 }
 ```
@@ -221,7 +221,7 @@ This allows you to get to a restaurant's dishes. Let's make a way to get back fr
 +
 +    public function restaurant()
 +    {
-+        return $this->belongsTo('App\Restaurant');
++        return $this->belongsTo('App\Models\Restaurant');
 +    }
 }
 ```
