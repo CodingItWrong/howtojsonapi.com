@@ -171,7 +171,7 @@ Since we don't have any data in our server yet, let's create a restaurant. We wo
 
 Create a POST request to `http://localhost:4000/restaurants`. Go to the Headers tab and enter key “Content-Type” and value “application/vnd.api+json”—this is the content type JSON:API requires.
 
-Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to "JSON", Postman will change the "Content-Type" to "application/json", which our server won't accept. Enter the following:
+Next, switch to the Body tab. Click the "none" dropdown and change it to "raw". Another "Text" dropdown will appear; change it to "JSON". Enter the following:
 
 ```json
 {

@@ -345,7 +345,7 @@ You can use Postman for GET requests as well: set up a GET request to `http://lo
 
 Next, let’s create a POST request to the same URL, `http://localhost:3000/restaurants`. Go to the Headers tab and enter key “Content-Type” and value “application/vnd.api+json”—this is the content type JSON:API requires.
 
-Next, switch to the Body tab. Leave the dropdown as "Text"; if you change it to "JSON", Postman will change the "Content-Type" to "application/json", which our server won't accept. Enter the following:
+Next, switch to the Body tab. Click the "none" dropdown and change it to "raw". Another "Text" dropdown will appear; change it to "JSON". Enter the following:
 
 ```json
 {
