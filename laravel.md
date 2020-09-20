@@ -132,11 +132,13 @@ If your database connection info is correct, you should see the following output
 ```bash
 Migration table created successfully.
 Migrating: 2014_10_12_000000_create_users_table
-Migrated:  2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (225.35ms)
 Migrating: 2014_10_12_100000_create_password_resets_table
-Migrated:  2014_10_12_100000_create_password_resets_table
-Migrating: 2019_06_08_161703_create_restaurants_table
-Migrated:  2019_06_08_161703_create_restaurants_table
+Migrated:  2014_10_12_100000_create_password_resets_table (169.18ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (128.76ms)
+Migrating: 2020_09_20_122048_create_restaurants_table
+Migrated:  2020_09_20_122048_create_restaurants_table (73.07ms)
 ```
 
 Next let’s look at the `app/Restaurant.php` file created:
