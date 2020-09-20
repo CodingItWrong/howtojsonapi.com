@@ -144,20 +144,22 @@ Migrated:  2020_09_20_122048_create_restaurants_table (73.07ms)
 Next let’s look at the `app/Models/Restaurant.php` file created:
 
 ```php
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
-    //
+    use HasFactory;
 }
 ```
 
-That’s…pretty empty. We have a `Restaurant` class that inherits from `Eloquent\Model`, but nothing else. This represents a Restaurant record, but how does it know what columns are available? Laravel will automatically inspect the table to see what columns are defined on it and make those columns available. We do need to add one bit of configuration: the fields that are allowed to be assigned-to by end users:
+That’s…pretty empty. We have a `Restaurant` class that inherits from `Eloquent\Model` and adds a `HasFactory` trait, but nothing else. This represents a Restaurant record, but how does it know what columns are available? Laravel will automatically inspect the table to see what columns are defined on it and make those columns available. We do need to add one bit of configuration: the fields that are allowed to be assigned-to by end users:
 
 ```diff
  class Restaurant extends Model
  {
--    //
+     use HasFactory;
++
 +    protected $fillable = ['name', 'address'];
  }
 ```
@@ -180,14 +182,15 @@ Add the following fields to the migration:
  });
 ```
 
-Why are we using `bigInteger` for `restaurant_id`? Primary keys are created with `bigIncrements()`, which creates a big integer column that automatically increments. To match data types, we create a column with the same big integer data type.
+Why are we using `bigInteger` for `restaurant_id`? Primary keys are created with `id()`, which creates a big integer column that automatically increments. To match data types, we create a column with the same big integer data type.
 
 And in the model file, mark these fields as fillable:
 
 ```diff
  class Dish extends Model
  {
--    //
+     use HasFactory;
++
 +    protected $fillable = ['name', 'rating', 'restaurant_id'];
  }
 ```
@@ -203,6 +206,8 @@ Our models will automatically detect the columns on them, but to use relationshi
 ```diff
  class Restaurant extends Model
  {
+     use HasFactory;
+
      protected $fillable = ['name', 'address'];
 +
 +    public function dishes()
