@@ -623,7 +623,7 @@ We’ve seen a ton of help Laravel JSON API has provided us: the ability to crea
 Now that you have a JSON:API backend, you should try connecting to it from the frontend. Choose a tutorial from the [How to JSON:API home page](/)!
 
 [firefox]: https://getfirefox.com
-[homestead]: https://laravel.com/docs/5.8/homestead
+[homestead]: https://laravel.com/docs/8.x/homestead
 [laravel-json-api]: https://laravel-json-api.readthedocs.io/en/latest/
 [jsonview]: https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc
 [postman]: https://www.getpostman.com/
