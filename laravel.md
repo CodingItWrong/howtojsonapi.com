@@ -400,7 +400,7 @@ Now make analogous changes to the `Dishes/Schema.php` file:
 +            ]
 +        ];
 +    }
-}
+ }
 ```
 
 We need to generate one more type of class for each of our models: an adapter. LJA uses the adapter to find how to query the relationships for each model type. Generate an adapter for each model:
