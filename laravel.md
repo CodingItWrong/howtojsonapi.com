@@ -493,8 +493,8 @@ Visit `http://opinion-ate.test/api/v1/restaurants/1` in your browser. You should
     "attributes": {
       "name": "Sushi Place",
       "address": "123 Main Street",
-      "created-at": "2019-06-05T11:44:08+00:00",
-      "updated-at": "2019-06-05T11:44:08+00:00"
+      "createdAt": "2020-09-20T12:29:15.000000Z",
+      "updatedAt": "2020-09-20T12:29:15.000000Z"
     },
     "relationships": {
       "dishes": {
@@ -534,8 +534,8 @@ Try visiting the `related` link, `http://opinion-ate.test/api/v1/restaurants/1/d
       "attributes": {
         "name": "Volcano Roll",
         "rating": 3,
-        "created-at": "2019-06-05T11:44:24+00:00",
-        "updated-at": "2019-06-05T11:44:24+00:00"
+        "createdAt": "2020-09-20T14:48:45.000000Z",
+        "updatedAt": "2020-09-20T14:48:45.000000Z"
       },
       "relationships": {
         "restaurant": {
@@ -555,8 +555,8 @@ Try visiting the `related` link, `http://opinion-ate.test/api/v1/restaurants/1/d
       "attributes": {
         "name": "Salmon Nigiri",
         "rating": 4,
-        "created-at": "2019-06-05T11:44:24+00:00",
-        "updated-at": "2019-06-05T11:44:24+00:00"
+        "createdAt": "2020-09-20T14:48:45.000000Z",
+        "updatedAt": "2020-09-20T14:48:45.000000Z"
       },
       "relationships": {
         "restaurant": {
@@ -610,8 +610,8 @@ Now that our request is set up, click Send and you should get a â€œ201 Createdâ€
     "attributes": {
       "name": "Spaghetti Place",
       "address": "789 Third Street",
-      "created-at": "2019-06-09T00:07:50+00:00",
-      "updated-at": "2019-06-09T00:07:50+00:00"
+      "createdAt": "2020-09-20T14:52:03.000000Z",
+      "updatedAt": "2020-09-20T14:52:03.000000Z"
     },
     "relationships": {
       "dishes": {
