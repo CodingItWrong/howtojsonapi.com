@@ -110,18 +110,18 @@ class CreateRestaurantsTable extends Migration
 }
 ```
 
-This file contains a *migration*, a class that tells Laravel how to make a change to a database. `Schema::create()` will the `restaurants` table. The function passed to `Schema::create()` will be passed the argument `$table`, representing a table. It's already set to create an `id` and `timestamps`. Let's add a few additional columns:
+This file contains a *migration*, a class that tells Laravel how to make a change to a database. `Schema::create()` will create the `restaurants` table. The function passed to `Schema::create()` will be passed the argument `$table`, representing a table. It's already set to create an `id` and `timestamps`. Let's add a few additional columns:
 
 ```diff
  Schema::create('restaurants', function (Blueprint $table) {
-     $table->bigIncrements('id');
+     $table->id();
 +    $table->string('name');
 +    $table->string('address');
      $table->timestamps();
  });
 ```
 
-The `restaurants` table hasn’t actually been create yet; the migration file just records *how* to create it. You can run it on your computer, when a coworker pulls it down she can run it on hers, and you can run it on the production server as well. Run the migration now with this command:
+The `restaurants` table hasn’t actually been created yet; the migration file just records *how* to create it. You can run it on your computer, when a coworker pulls it down she can run it on hers, and you can run it on the production server as well. Run the migration now with this command:
 
 ```bash
 $ php artisan migrate
