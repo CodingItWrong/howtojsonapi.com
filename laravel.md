@@ -284,7 +284,7 @@ Next, call that seeder file from the main `DatabaseSeeder.php`:
       */
      public function run()
      {
--        // // User::factory(10)->create();
+-        // User::factory(10)->create();
 +        $this->call(RestaurantSeeder::class);
      }
  }
