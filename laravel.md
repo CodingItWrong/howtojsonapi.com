@@ -353,13 +353,13 @@ These commands together create a directory `app/JsonApi/` with a folder under th
      return [
 +        'name' => $resource->name,
 +        'address' => $resource->address,
-         'created-at' => $resource->created_at->toAtomString(),
-         'updated-at' => $resource->updated_at->toAtomString(),
+         'created-at' => $resource->created_at,
+         'updated-at' => $resource->updated_at,
     ];
 }
 ```
 
-Note that `created-at` and `updated-at` are exposed automatically. `toAtomString()` is a method on datetime objects created with the Carbon library that Laravel uses by default; it formats the dates.
+Note that `created-at` and `updated-at` are exposed automatically.
 
 We also want to expose the `dishes` relationship on a restaurant. Add the following function to the `Schema` class:
 
@@ -386,8 +386,8 @@ Now make analogous changes to the `Dishes/Schema.php` file:
          return [
 +            'name' => $resource->name,
 +            'rating' => $resource->rating,
-             'created-at' => $resource->created_at->toAtomString(),
-             'updated-at' => $resource->updated_at->toAtomString(),
+             'created-at' => $resource->created_at,
+             'updated-at' => $resource->updated_at,
          ];
      }
 +
