@@ -77,7 +77,7 @@ You’ll see output like the following:
 
 ```bash
 Model created successfully.
-Created Migration: 2019_06_08_161703_create_restaurants_table
+Created Migration: 2020_09_20_122048_create_restaurants_table
 ```
 
 The generator created a number of files; let’s take a look at a few of them. First, open the file in `database/migrations` that ends with `_create_restaurants_table.php` — the date on the file will be different than mine, showing the time you ran the command.
