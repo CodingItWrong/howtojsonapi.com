@@ -236,15 +236,16 @@ Now that our models are set up, we can create some records. You could do it by h
 Generate a seeder file:
 
 ```sh
-$ php artisan make:seeder RestaurantsTableSeeder
+$ php artisan make:seeder RestaurantSeeder
 ```
 
-This will create the file `database/seeds/RestaurantsTableSeeder.php`. Add the following to it:
+This will create a file `RestaurantSeeder.php` in the `database/seeders/` folder. Add the following to it:
 
 ```diff
-+use App\Restaurant;
+ use Illuminate\Database\Seeder;
++use App\Models\Restaurant;
 
- class RestaurantsTableSeeder extends Seeder
+ class RestaurantSeeder extends Seeder
  {
      /**
       * Run the database seeds.
@@ -283,8 +284,8 @@ Next, call that seeder file from the main `DatabaseSeeder.php`:
       */
      public function run()
      {
--        // $this->call(UsersTableSeeder::class);
-+        $this->call(RestaurantsTableSeeder::class);
+-        // // User::factory(10)->create();
++        $this->call(RestaurantSeeder::class);
      }
  }
 ```
