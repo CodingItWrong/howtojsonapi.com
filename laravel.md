@@ -67,7 +67,7 @@ DB_PASSWORD=secret
 ## Models
 Laravel persists data to the database using classes called Eloquent models. Laravel JSON API uses the same models, so to start building our app we’ll create models in the typical Laravel way.
 
-First let’s create a model representing a restaurant. Run the following command in the terminal:
+First let’s create a model representing a restaurant. If you aren't already connected to Homestead, run `vagrant ssh`, go into the `opinion-ate` directory, and stay connected for the rest of the tutorial. Then, run the following command:
 
 ```bash
 $ php artisan make:model Restaurant --migration
