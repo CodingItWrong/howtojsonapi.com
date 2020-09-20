@@ -51,7 +51,7 @@ Run `vagrant provision` once more to apply this configuration. Finally, on your 
 192.168.10.10  opinion-ate.test
 ```
 
-Let's make sure our app is up and running. Go to `http://opinion-ate.test` in a browser. You should see the “Laravel" page with links to "Docs", "Laracasts", and other things.
+Let's make sure our app is up and running. Go to `http://opinion-ate.test` in a browser. You should see the “Laravel" page with links to "Documentation", "Laracasts", and other things.
 
 One last bit of configuration: check the `.env` file to make sure your database connection is correct. With Homestead, update it to match the following:
 
