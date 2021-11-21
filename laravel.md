@@ -5,7 +5,16 @@ logo: /images/laravel.svg
 logo_alt: Laravel logo
 ---
 
-[Laravel JSON API][laravel-json-api] is a library for creating JSON:API backends using the Laravel application framework.
+<div class="alert alert-success" role="alert">
+  <p>
+    The JSON:API package used in the tutorial below has been superceded by <code>laravel-json-api/laravel</code>, and is no longer recommended to be used for new projects.
+  </p>
+  <p>
+    To learn the new recommended Laravel JSON:API package, we recommend checking out <a href="https://laraveljsonapi.io/docs/1.0/tutorial/">the official Laravel JSON:API</a> tutorial.
+  </p>
+</div>
+
+Laravel JSON API is a library for creating JSON:API backends using the Laravel application framework.
 
 To try it out, let's create a web service for rating dishes at restaurants. We'll call it "Opinion Ate".
 
