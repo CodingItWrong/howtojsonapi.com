@@ -22,7 +22,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: howtojsonapi
 # github_username:
-google_analytics: 'UA-141698582-1'
+google_analytics: 'G-XC19ZKY7H0'
 
 # Build settings
 markdown: kramdown
